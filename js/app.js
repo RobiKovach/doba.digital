@@ -165,7 +165,24 @@
         }
     }));
     document.addEventListener("DOMContentLoaded", (() => {
-        const lottieContainer = document.getElementById("lottie-hover");
+        const buttons = document.querySelectorAll(".lottie-button");
+        buttons.forEach((button => {
+            const lottieContainer = button.querySelector(".lottie-bg");
+            const animation = lottie.loadAnimation({
+                container: lottieContainer,
+                renderer: "svg",
+                loop: false,
+                autoplay: false,
+                path: "img/9gdAU8lkom.json"
+            });
+            button.addEventListener("mouseenter", (() => {
+                animation.goToAndPlay(0, true);
+            }));
+        }));
+    }));
+    document.addEventListener("DOMContentLoaded", (() => {
+        const button = document.querySelector(".lottie-button-header");
+        const lottieContainer = button.querySelector(".lottie-bg-header");
         const animation = lottie.loadAnimation({
             container: lottieContainer,
             renderer: "svg",
@@ -173,7 +190,6 @@
             autoplay: true,
             path: "img/9gdAU8lkom.json"
         });
-        const button = document.querySelector(".lottie-button");
         button.addEventListener("mouseenter", (() => {
             animation.goToAndPlay(0, true);
         }));

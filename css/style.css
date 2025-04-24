@@ -328,11 +328,11 @@ h6 {
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(240,83,45,.4)
 }
-.lottie-button {
+.lottie-button-header {
   position: relative;
   overflow: hidden
 }
-.lottie-bg {
+.lottie-button-header .lottie-bg-header {
   position: absolute;
   top: 0;
   left: 0;
@@ -340,16 +340,6 @@ h6 {
   height: 100%;
   pointer-events: none;
   z-index: 0
-}
-.btn-text {
-  position: relative;
-  z-index: 1
-}
-.lottie-bg svg {
-  width: 100%!important;
-  height: 100%!important;
-  -o-object-fit: cover;
-  object-fit: cover
 }
 .links-header__socials {
   display: none;
@@ -494,6 +484,136 @@ h6 {
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
   top: 8px
+}
+.footer {
+  background-color: #161d22;
+  border-radius: 40px 40px 0 0
+}
+.footer__container {
+  display: flex;
+  padding: 48px 44px 24px 44px;
+  flex-direction: column;
+  align-items: center
+}
+.footer__main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: .5px solid #252b37;
+  padding-bottom: 32px;
+  width: 100%
+}
+.footer__second {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0 24px 0;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #a4a7ae
+}
+.main-footer__item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  align-items: flex-start
+}
+.item-footer__title {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px
+}
+.item-footer__nav {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem
+}
+.item-footer__link {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: #e9eaeb;
+  transition: scale .3s ease-in-out
+}
+.item-footer__link:hover {
+  scale: 1.05
+}
+.item-footer__socials {
+  display: flex;
+  align-items: center;
+  -webkit-column-gap: 1.5rem;
+  -moz-column-gap: 1.5rem;
+  column-gap: 1.5rem
+}
+.item-footer__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 32px;
+  background: #fff1e7;
+  transition: scale .3s ease-in-out,box-shadow .3s ease-in-out
+}
+.item-footer__social:hover {
+  scale: 1.05;
+  box-shadow: 0 8px 24px rgba(240,83,45,.25)
+}
+.actions__btn {
+  display: flex;
+  height: 48px;
+  padding: 12px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 32px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -.32px;
+  color: #fff;
+  transition: .3s ease-in;
+  text-align: center;
+  background-size: 200%;
+  background-position: left center;
+  transition: background-position .4s ease,box-shadow .3s ease,-webkit-transform .3s ease;
+  transition: background-position .4s ease,transform .3s ease,box-shadow .3s ease;
+  transition: background-position .4s ease,transform .3s ease,box-shadow .3s ease,-webkit-transform .3s ease;
+  box-shadow: 0 4px 8px rgba(240,83,45,.3);
+  cursor: pointer
+}
+.actions__btn:hover {
+  background-position: right center;
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(240,83,45,.4)
+}
+.lottie-button {
+  position: relative;
+  overflow: hidden;
+  display: flex
+}
+.menu-open .lottie-button {
+  display: none
+}
+.lottie-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 130%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0
+}
+.btn-text {
+  position: relative;
+  z-index: 1
 }
 @media (min-width:1024px) {
   .menu-item-has-children:hover .sub-menu {
@@ -661,7 +781,7 @@ h6 {
   .actions-header__btn:hover {
     background: rgba(37,43,55,.7411764706)
   }
-  .lottie-bg {
+  .lottie-bg-header {
     display: none
   }
   .links-header__socials {
@@ -680,6 +800,10 @@ h6 {
   .menu-open .lang-toggle .lang-arrow::before {
     border-left: 1px solid #fff;
     border-bottom: 1px solid #fff
+  }
+  .footer__main {
+    flex-direction: column;
+    row-gap: 2.5rem
   }
 }
 @media (max-width:1024px)and (any-hover:none) {
