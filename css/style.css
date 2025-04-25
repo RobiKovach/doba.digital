@@ -670,10 +670,105 @@ h6 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 103%;
   height: 100%;
   pointer-events: none;
   z-index: -1
+}
+.statistic {
+  padding: 40px 0
+}
+.statistic__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.4375rem
+}
+.statistic__title {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: -1.44px
+}
+.statistic__items {
+  display: flex;
+  align-items: center;
+  -webkit-column-gap: 1.5rem;
+  -moz-column-gap: 1.5rem;
+  column-gap: 1.5rem
+}
+.statistic__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: .5rem;
+  padding: 40px;
+  max-width: 322px;
+  height: 172px;
+  border-radius: 40px;
+  border: 1px solid #e9eaeb;
+  background: #fafafa;
+  overflow: hidden;
+  position: relative
+}
+.item-statistic__number {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: -1.44px
+}
+.item-statistic__text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%
+}
+.item-statistic__bg-null {
+  width: 305px;
+  height: 298px;
+  position: absolute;
+  display: none
+}
+.item-statistic__bg-one {
+  width: 305px;
+  height: 298px;
+  position: absolute;
+  right: -88px;
+  top: -148px
+}
+.item-statistic__bg-two {
+  width: 305px;
+  height: 298px;
+  position: absolute;
+  right: -201px;
+  top: -149px
+}
+.item-statistic__bg-three {
+  width: 305px;
+  height: 298px;
+  position: absolute;
+  right: -183px;
+  top: -148px
+}
+.effect-block {
+  position: relative;
+  width: 322px;
+  height: 172px;
+  overflow: hidden;
+  border-radius: 40px;
+  border: 1px solid #e9eaeb;
+  background: #fafafa
+}
+.hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 305px;
+  height: 298px;
+  pointer-events: none;
+  transition: -webkit-transform .1s ease-out;
+  transition: transform .1s ease-out;
+  transition: transform .1s ease-out,-webkit-transform .1s ease-out
 }
 @media (min-width:1024px) {
   .menu-item-has-children:hover .sub-menu {
@@ -865,12 +960,16 @@ h6 {
     flex-direction: column;
     row-gap: 2.5rem
   }
+  .page {
+    margin-top: 124px
+  }
   .hero__container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 0 20px
+    padding: 0 20px;
+    margin-bottom: 40px
   }
   .info-hero__title {
     font-size: 32px;
@@ -878,6 +977,49 @@ h6 {
   }
   .info-hero__description {
     margin-top: 0
+  }
+  .statistic {
+    padding: 80px 0 0 0
+  }
+  .statistic__container {
+    padding: 0 20px
+  }
+  .statistic__title {
+    font-size: 24px;
+    letter-spacing: -.96px
+  }
+  .statistic__items {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 1rem
+  }
+  .statistic__item {
+    padding: 24px;
+    max-width: 100%;
+    width: 100%;
+    height: auto
+  }
+  .item-statistic__number {
+    font-size: 24px;
+    letter-spacing: -.96px
+  }
+  .item-statistic__bg-null {
+    display: flex;
+    right: -13px;
+    top: -120px
+  }
+  .item-statistic__bg-one {
+    right: -22px;
+    top: -148px
+  }
+  .item-statistic__bg-two {
+    right: -135px;
+    top: -149px
+  }
+  .item-statistic__bg-three {
+    right: -117px;
+    top: -148px
   }
 }
 @media (max-width:1024px)and (any-hover:none) {
@@ -887,6 +1029,10 @@ h6 {
 }
 @media (max-width:47.99875em) {
   .header {
-    padding: 0 20px
+    padding: 0 20px;
+    top: 20px
+  }
+  .header__container {
+    padding: 8px 12px
   }
 }

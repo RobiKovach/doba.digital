@@ -216,6 +216,37 @@
             image.style.transform = "rotateX(0deg) rotateY(0deg)";
         }));
     }));
+    document.addEventListener("DOMContentLoaded", (() => {
+        const blocks = document.querySelectorAll(".effect-block");
+        blocks.forEach((block => {
+            const svg = block.querySelector(".hover-effect");
+            block.addEventListener("mousemove", (e => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left - svg.clientWidth / 2;
+                const y = e.clientY - rect.top - svg.clientHeight / 2;
+                svg.style.left = `${x}px`;
+                svg.style.top = `${y}px`;
+            }));
+            block.addEventListener("mouseenter", (e => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left - svg.clientWidth / 2;
+                const y = e.clientY - rect.top - svg.clientHeight / 2;
+                svg.style.left = `${x}px`;
+                svg.style.top = `${y}px`;
+                svg.style.opacity = "1";
+                svg.style.transform = "scale(1)";
+            }));
+            block.addEventListener("mouseleave", (e => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left - svg.clientWidth / 2;
+                const y = e.clientY - rect.top - svg.clientHeight / 2;
+                svg.style.left = `${x}px`;
+                svg.style.top = `${y}px`;
+                svg.style.opacity = "0";
+                svg.style.transform = "scale(0.7)";
+            }));
+        }));
+    }));
     window["FLS"] = true;
     menuInit();
 })();
