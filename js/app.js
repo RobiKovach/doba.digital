@@ -165,33 +165,55 @@
         }
     }));
     document.addEventListener("DOMContentLoaded", (() => {
-        const buttons = document.querySelectorAll(".lottie-button");
-        buttons.forEach((button => {
-            const lottieContainer = button.querySelector(".lottie-bg");
-            const animation = lottie.loadAnimation({
-                container: lottieContainer,
-                renderer: "svg",
-                loop: false,
-                autoplay: false,
-                path: "img/9gdAU8lkom.json"
-            });
-            button.addEventListener("mouseenter", (() => {
-                animation.goToAndPlay(0, true);
+        const lottieButtons = [ {
+            buttonClass: ".lottie-button",
+            bgClass: ".lottie-bg",
+            autoplay: false,
+            loop: false
+        }, {
+            buttonClass: ".lottie-button",
+            bgClass: ".lottie-bg-hero",
+            autoplay: false,
+            loop: false
+        }, {
+            buttonClass: ".lottie-button-header",
+            bgClass: ".lottie-bg-header",
+            autoplay: true,
+            loop: true
+        } ];
+        lottieButtons.forEach((({buttonClass, bgClass, autoplay, loop}) => {
+            const buttons = document.querySelectorAll(buttonClass);
+            buttons.forEach((button => {
+                const lottieContainer = button.querySelector(bgClass);
+                if (!lottieContainer) return;
+                const animation = lottie.loadAnimation({
+                    container: lottieContainer,
+                    renderer: "svg",
+                    loop,
+                    autoplay,
+                    path: "img/9gdAU8lkom.json"
+                });
+                if (!autoplay) button.addEventListener("mouseenter", (() => {
+                    animation.goToAndPlay(0, true);
+                }));
             }));
         }));
     }));
     document.addEventListener("DOMContentLoaded", (() => {
-        const button = document.querySelector(".lottie-button-header");
-        const lottieContainer = button.querySelector(".lottie-bg-header");
-        const animation = lottie.loadAnimation({
-            container: lottieContainer,
-            renderer: "svg",
-            loop: true,
-            autoplay: true,
-            path: "img/9gdAU8lkom.json"
-        });
-        button.addEventListener("mouseenter", (() => {
-            animation.goToAndPlay(0, true);
+        const banner = document.querySelector(".banner-hero");
+        const image = banner.querySelector(".banner-hero__img");
+        banner.addEventListener("mousemove", (e => {
+            const rect = banner.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / centerY * 10;
+            const rotateY = (x - centerX) / centerX * -10;
+            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }));
+        banner.addEventListener("mouseleave", (() => {
+            image.style.transform = "rotateX(0deg) rotateY(0deg)";
         }));
     }));
     window["FLS"] = true;
