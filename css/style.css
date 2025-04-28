@@ -614,7 +614,7 @@ h6 {
 }
 .btn-text {
   position: relative;
-  z-index: 1
+  z-index: 2
 }
 .page {
   margin-top: 200px
