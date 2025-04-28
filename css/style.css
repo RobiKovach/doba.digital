@@ -673,7 +673,7 @@ h6 {
   width: 103%;
   height: 100%;
   pointer-events: none;
-  z-index: -1
+  z-index: 1
 }
 .statistic {
   padding: 40px 0
@@ -812,7 +812,13 @@ h6 {
   align-self: stretch;
   border-radius: 40px;
   border: 1px solid #e9eaeb;
-  background: #161d22
+  background: #161d22;
+  transition: all .3s ease-in-out;
+  cursor: pointer
+}
+.items-products__item:hover {
+  scale: 1.02;
+  box-shadow: 0 6px 14px rgba(240,83,45,.4)
 }
 .item-product__info {
   display: flex;
@@ -858,6 +864,160 @@ h6 {
   font-weight: 400;
   line-height: 140%;
   align-self: stretch
+}
+.keys__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  margin-top: 80px;
+  margin-bottom: 70px
+}
+.keys__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.keys__title {
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: -1.44px
+}
+.keys__control {
+  display: flex;
+  align-items: center;
+  -webkit-column-gap: 10px;
+  -moz-column-gap: 10px;
+  column-gap: 10px
+}
+.keys__slide {
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 40px;
+  border: 1px solid #e9eaeb;
+  background: #fafafa
+}
+.swiper-button-prev {
+  border-radius: 999px;
+  border: 1px solid #f0532d;
+  display: flex;
+  width: 55.11px;
+  height: 55.11px;
+  padding: 17.23px;
+  justify-content: center;
+  align-items: center
+}
+.swiper-button-prev:hover {
+  background-color: #f0532d
+}
+.swiper-button-prev:hover .svg-prev {
+  stroke: #fff
+}
+.swiper-button-next {
+  border-radius: 999px;
+  border: 1px solid #f0532d;
+  display: flex;
+  width: 55.11px;
+  height: 55.11px;
+  padding: 17.23px;
+  justify-content: center;
+  align-items: center
+}
+.swiper-button-next:hover {
+  background-color: #f0532d
+}
+.swiper-button-next:hover .svg-next {
+  stroke: #fff
+}
+.svg-prev {
+  stroke: #f0532d;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  transition: all .3s ease-in-out
+}
+.svg-next {
+  stroke: #f0532d;
+  transition: all .3s ease-in-out
+}
+.slide-keys__image {
+  width: 100%;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  display: inline-block
+}
+.slide-keys__img {
+  width: 100%;
+  transition: box-shadow .3s ease,-webkit-transform .3s ease;
+  transition: transform .3s ease,box-shadow .3s ease;
+  transition: transform .3s ease,box-shadow .3s ease,-webkit-transform .3s ease;
+  will-change: transform;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  border-radius: 16px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none
+}
+.slide-keys__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 16px;
+  padding: 0 40px 40px
+}
+.slide-keys__title {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: -1.12px
+}
+.slide-keys__text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  margin-bottom: 8px
+}
+.lotie-keys {
+  width: 125%
+}
+.swiper {
+  overflow: hidden
+}
+.swiper-initialized {
+  touch-action: pan-y
+}
+.swiper-wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+  display: flex;
+  position: relative
+}
+.swiper-vertical .swiper-wrapper {
+  flex-direction: column
+}
+.swiper-autoheight .swiper-wrapper {
+  align-items: flex-start
+}
+.swiper-initialized .swiper-slide {
+  flex-shrink: 0
+}
+.swiper-android .swiper-slide,
+.swiper-android .swiper-wrapper {
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0)
+}
+.swiper-button-lock {
+  display: none!important
 }
 @media (min-width:1024px) {
   .menu-item-has-children:hover .sub-menu {
@@ -1111,7 +1271,8 @@ h6 {
     top: -148px
   }
   .products__container {
-    padding: 0 20px
+    padding: 0 20px;
+    margin-bottom: 0
   }
   .products__header {
     flex-direction: column;
@@ -1132,6 +1293,25 @@ h6 {
     flex: 1
   }
   .item-product__title {
+    font-size: 20px;
+    letter-spacing: -.8px
+  }
+  .keys__container {
+    padding: 0 20px;
+    margin-bottom: 0
+  }
+  .keys__title {
+    font-size: 24px;
+    letter-spacing: -.96px;
+    width: 221px
+  }
+  .keys__slide {
+    width: 100%
+  }
+  .slide-keys__info {
+    padding: 0 20px 40px
+  }
+  .slide-keys__title {
     font-size: 20px;
     letter-spacing: -.8px
   }
