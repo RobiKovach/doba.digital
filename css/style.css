@@ -587,7 +587,8 @@ h6 {
   transition: background-position .4s ease,transform .3s ease,box-shadow .3s ease;
   transition: background-position .4s ease,transform .3s ease,box-shadow .3s ease,-webkit-transform .3s ease;
   box-shadow: 0 4px 8px rgba(240,83,45,.3);
-  cursor: pointer
+  cursor: pointer;
+  -webkit-text-fill-color: #fff
 }
 .actions__btn:hover {
   background-position: right center;
@@ -598,7 +599,8 @@ h6 {
 .lottie-button {
   position: relative;
   overflow: hidden;
-  display: flex
+  display: flex;
+  -webkit-transform: translateZ(0)
 }
 .menu-open .lottie-button {
   display: none
@@ -610,11 +612,14 @@ h6 {
   width: 130%;
   height: 100%;
   pointer-events: none;
-  z-index: 0
+  z-index: 0;
+  -webkit-transform: translateZ(0)
 }
 .btn-text {
   position: relative;
-  z-index: 2
+  z-index: 1;
+  -webkit-text-fill-color: #fff;
+  -webkit-transform: translateZ(0)
 }
 .page {
   margin-top: 200px
