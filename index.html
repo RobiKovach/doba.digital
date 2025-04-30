@@ -6,9 +6,9 @@
 	<meta charset="UTF-8" />
 	<meta name="format-detection" content="telephone=no" />
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20250428152107" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20250430152435" />
 	<link rel="shortcut icon" href="favicon.ico" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js?_v=20250428152107"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js?_v=20250430152435"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -513,6 +513,211 @@
 					</div>
 				</div>
 			</section>
+			<section class="calculator">
+				<div class="calculator__container">
+					<div class="calculator__header">
+						<p class="calculator__title">Отримайте оцінку вартості</p>
+						<p class="calculator__description">
+							Ми пропонуємо вам скористатися нашим калькулятором вартості
+							проєкту, щоб отримати оцінку, виходячи з ваших вимог.
+							<br /><br />
+							Витрати часу: до 5 хвилин.
+						</p>
+					</div>
+
+					<form class="calculator__quiz quiz-calculator" id="quizForm">
+						<div class="quiz-calculator__steps step-indicator" id="stepIndicator">
+							<span data-step="1">01</span>
+							<span data-step="2">02</span>
+							<span data-step="3">03</span>
+						</div>
+						<!-- Steps -->
+						<div class="quiz-calculator__step step active" data-step="1">
+							<div class="quiz-calculator__question question-calculator question">
+								<p class="question-calculator__title">
+									Який тип сайту потрібен?
+								</p>
+								<div class="question-calculator__box">
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step1_q1" value="A" data-price="2600" />Інтернет-магазин</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step1_q1" value="B" data-price="1600" />Корпоративний</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step1_q1" value="C" data-price="700" />Лендінг
+									</label>
+								</div>
+								<div class="error-msg"></div>
+							</div>
+							<div class="quiz-calculator__question question-calculator question">
+								<p class="question-calculator__title">
+									Чи потрібно кілька мов для сайту?
+								</p>
+								<div class="question-calculator__box">
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step1_q2" value="Потрібна 1 мова" data-price="0" />Потрібна 1 мова</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step1_q2" value="Потрібно 2 мови" data-price="50" />Потрібно 2 мови</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step1_q2" value="Потрібно 3 мови і більше" data-price="150" />Потрібно 3 мови і більше</label>
+								</div>
+								<div class="error-msg"></div>
+							</div>
+						</div>
+
+						<div class="quiz-calculator__step step" data-step="2">
+							<!-- Інтернет-магазин -->
+							<div class="quiz-calculator__variant step2-content" data-type="A">
+								<div class="quiz-calculator__question question-calculator question">
+									<p class="question-calculator__title">
+										Скільки товарів планується додати?
+									</p>
+									<div class="question-calculator__box">
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="До 30 товарів" data-price="0" />До 30 товарів</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="30–100 товарів" data-price="600" />30–100 товарів</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="100+ товарів" data-price="1000" />100+ товарів</label>
+									</div>
+									<div class="error-msg"></div>
+								</div>
+								<div class="quiz-calculator__question question-calculator question">
+									<p class="question-calculator__title">
+										Яка складність структури товарів?
+									</p>
+									<div class="question-calculator__box">
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="1–2 категорії (простий магазин)" data-price="0" />1–2 категорії (простий магазин)</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="3–5 категорій" data-price="100" />3–5 категорій</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="6+ категорій" data-price="300" />6+ категорій
+										</label>
+									</div>
+									<div class="error-msg"></div>
+								</div>
+							</div>
+
+							<!-- Корпоративний -->
+							<div class="quiz-calculator__variant step2-content" data-type="B" style="display: none">
+								<div class="quiz-calculator__question question-calculator question">
+									<p class="question-calculator__title">
+										Скільки сторінок потрібно створити?
+									</p>
+									<div class="question-calculator__box">
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="До 5 сторінок" data-price="0" />До 5 сторінок
+										</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="6–10 сторінок" data-price="400" />6–10 сторінок</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="11+ сторінок" data-price="1000" />11+ сторінок</label>
+									</div>
+									<div class="error-msg"></div>
+								</div>
+								<div class="quiz-calculator__question question-calculator question">
+									<p class="question-calculator__title">
+										Який обсяг контенту на сторінках?
+									</p>
+									<div class="question-calculator__box">
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="Мінімальний (до 5 блоків)" data-price="0" />Мінімальний (до 5 блоків)</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="Середній (6–10 блоків)" data-price="200" />Середній (6–10 блоків)</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="Багато контенту (11+ блоків)" data-price="600" />Багато контенту (11+ блоків)</label>
+									</div>
+									<div class="error-msg"></div>
+								</div>
+							</div>
+
+							<!-- Лендінг -->
+							<div class="quiz-calculator__variant step2-content" data-type="C" style="display: none">
+								<div class="quiz-calculator__question question-calculator question">
+									<p class="question-calculator__title">
+										Скільки блоків буде на сайті?
+									</p>
+									<div class="question-calculator__box">
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="До 5 блоків" data-price="0" />До 5 блоків
+										</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="6–10 блоків" data-price="100" />6–10 блоків</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q1" value="11+ блоків" data-price="300" />11+ блоків</label>
+									</div>
+									<div class="error-msg"></div>
+								</div>
+								<div class="quiz-calculator__question question-calculator question">
+									<p class="question-calculator__title">
+										Яку мету має виконувати лендінг?
+									</p>
+									<div class="question-calculator__box">
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="Презентація послуги або події" />Презентація послуги або події</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="Збір заявок на послугу" />Збір заявок на послугу</label>
+										<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step2_q2" value="Продаж інфопродукту" />Продаж інфопродукту</label>
+									</div>
+									<div class="error-msg"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="quiz-calculator__step step" data-step="3">
+							<div class="quiz-calculator__question question-calculator question">
+								<div class="question__header">
+									<p class="question-calculator__title">
+										Які додаткові послуги потрібні?
+									</p>
+									<span>(можна вибрати кілька варіантів)</span>
+								</div>
+								<div class="question-calculator__box">
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="checkbox" name="step3_q1[]" value="Структура сайту" data-price="100" />Структура сайту</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="checkbox" name="step3_q1[]" value="Копірайтинг" data-price="200" />Копірайтинг</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="checkbox" name="step3_q1[]" value="Юридичні документи" data-price="200" />Юридичні документи</label>
+								</div>
+								<div class="error-msg"></div>
+							</div>
+
+							<div class="quiz-calculator__question question-calculator question">
+								<p class="question-calculator__title">
+									Чи будуть інтеграції на сайті?
+								</p>
+								<div class="question-calculator__box">
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step3_q2" value="Telegram, CRM, аналітика" data-price="150" />Telegram, CRM, аналітика</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step3_q2" value="Платіжні, booking, тощо" data-price="100" />Платіжні, booking, тощо</label>
+									<label class="question-calculator__label"><input class="question-calculator__radio" type="radio" name="step3_q2" value="Немає" data-price="0" />Немає</label>
+								</div>
+								<div class="error-msg"></div>
+							</div>
+						</div>
+
+						<div class="quiz-calculator__step step" data-step="4">
+							<p class="quiz-calculator__price">
+								Орієнтовна вартість вашого сайту:
+								<span class="quiz-calculator__total" id="totalPrice">від 0 €</span>
+							</p>
+							<div id="answersReview"></div>
+
+							<div class="quiz-calculator__form form-calculator">
+								<img src="img/statistic-hover.svg" alt="effect-image" class="form-calculator__effect" />
+								<p class="form-calculator__title">Залишіть заявку</p>
+								<div class="form-calculator__row">
+									<label class="form-calculator__label">Ваше імʼя*
+										<input class="form-calculator__name" type="text" name="user_name" placeholder="Введіть імʼя" required />
+										<div class="error-msg"></div>
+									</label>
+									<label class="form-calculator__label">Ваш телефон*<input class="form-calculator__phone" type="tel" name="user_tel" placeholder="+ 380" required />
+										<div class="error-msg"></div>
+									</label>
+								</div>
+								<div class="form-calculator__btn submit-wrapper">
+									<button type="submit" class="form-calculator__submit submit-final">
+										Надіслати
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="quiz-calculator__step step centered" data-step="5">
+							<p class="quiz-calculator__success">
+								Дякуємо! Вашу заявку надіслано успішно.
+							</p>
+							<button type="button" id="restartBtn" class="form-calculator__restart">
+								Пройти знову
+							</button>
+						</div>
+
+						<!-- Navigation -->
+						<div class="quiz-calculator__navigation navigation-calculator navigation buttons">
+							<button class="navigation-calculator__prev" type="button" id="prevBtn">
+								Назад
+							</button>
+							<button class="navigation-calculator__next" type="button" id="nextBtn">
+								Продовжити
+							</button>
+						</div>
+					</form>
+				</div>
+			</section>
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
@@ -588,7 +793,7 @@
 		</footer>
 
 	</div>
-	<script src="js/app.min.js?_v=20250428152107"></script>
+	<script src="js/app.min.js?_v=20250430152435"></script>
 </body>
 
 </html>

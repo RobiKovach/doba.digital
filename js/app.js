@@ -3428,35 +3428,180 @@
             }));
         }));
     }));
-    document.addEventListener("DOMContentLoaded", (() => {
-        const blocks = document.querySelectorAll(".effect-block");
-        blocks.forEach((block => {
-            const svg = block.querySelector(".hover-effect");
-            block.addEventListener("mousemove", (e => {
-                const rect = block.getBoundingClientRect();
-                const x = e.clientX - rect.left - svg.clientWidth / 2;
-                const y = e.clientY - rect.top - svg.clientHeight / 2;
-                svg.style.left = `${x}px`;
-                svg.style.top = `${y}px`;
+    const steps = document.querySelectorAll(".quiz-calculator__step");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const script_form = document.getElementById("quizForm");
+    const buttonsBlock = document.querySelector(".quiz-calculator__navigation");
+    const indicator = document.getElementById("stepIndicator");
+    const restartBtn = document.getElementById("restartBtn");
+    let currentStep = 0;
+    function showStep(index) {
+        steps.forEach(((step, i) => step.classList.toggle("active", i === index)));
+        prevBtn.style.display = index > 0 && index < 3 ? "inline-block" : "none";
+        nextBtn.style.display = index < steps.length - 2 ? "inline-block" : "none";
+        if (index < 3) {
+            indicator.style.display = "flex";
+            buttonsBlock.style.display = "flex";
+            document.querySelectorAll(".step-indicator span").forEach(((el, i) => {
+                el.classList.toggle("active", i === index);
             }));
-            block.addEventListener("mouseenter", (e => {
-                const rect = block.getBoundingClientRect();
-                const x = e.clientX - rect.left - svg.clientWidth / 2;
-                const y = e.clientY - rect.top - svg.clientHeight / 2;
-                svg.style.left = `${x}px`;
-                svg.style.top = `${y}px`;
-                svg.style.opacity = "1";
-                svg.style.transform = "scale(1)";
-            }));
-            block.addEventListener("mouseleave", (e => {
-                const rect = block.getBoundingClientRect();
-                const x = e.clientX - rect.left - svg.clientWidth / 2;
-                const y = e.clientY - rect.top - svg.clientHeight / 2;
-                svg.style.left = `${x}px`;
-                svg.style.top = `${y}px`;
-                svg.style.opacity = "0";
-                svg.style.transform = "scale(0.7)";
-            }));
+        } else {
+            indicator.style.display = "none";
+            buttonsBlock.style.display = index === 3 ? "none" : "flex";
+        }
+        if (index === 3) {
+            const getLabelText = (name, multiple = false) => {
+                const inputs = script_form.querySelectorAll(`input[name="${name}"]${multiple ? ":checked" : ":checked"}`);
+                const texts = Array.from(inputs).map((input => input.closest("label")?.textContent.trim() || input.value));
+                return texts.length > 0 ? texts.join(", ") : "-";
+            };
+            const totalPriceEl = document.getElementById("totalPrice");
+            const getTotalPrice = () => {
+                const checkedInputs = script_form.querySelectorAll("input:checked");
+                let total = 0;
+                checkedInputs.forEach((input => {
+                    const price = parseFloat(input.dataset.price || "0");
+                    total += price;
+                }));
+                return total;
+            };
+            const total = getTotalPrice();
+            if (totalPriceEl) totalPriceEl.textContent = `від ${total.toLocaleString()} €`;
+            function getStep2Title() {
+                const selectedType = script_form.querySelector('input[name="step1_q1"]:checked')?.value;
+                switch (selectedType) {
+                  case "A":
+                    return "Кількість товарів:";
+
+                  case "B":
+                    return "Кількість сторінок:";
+
+                  case "C":
+                    return "Кількість блоків:";
+
+                  default:
+                    return "Кількість:";
+                }
+            }
+            function getStep2Subtitle() {
+                const selectedType = script_form.querySelector('input[name="step1_q1"]:checked')?.value;
+                switch (selectedType) {
+                  case "A":
+                    return "Структура товарів:";
+
+                  case "B":
+                    return "Обсяг контенту:";
+
+                  case "C":
+                    return "Мета лендінгу:";
+
+                  default:
+                    return "Структура / контент:";
+                }
+            }
+            const html = `\n      <div class="summary-grid">\n      <div class="summary-grid__row">\n        <div class="summary-grid__answer"><p>Тип сайту:</p><span class="summary-grid__info"> ${getLabelText("step1_q1")}</span></div>\n        <div class="summary-grid__answer"><p>Мовність:</p><span class="summary-grid__info"> ${getLabelText("step1_q2")}</span></div>\n        </div>\n      <div class="summary-grid__row">\n        <div class="summary-grid__answer"><p>${getStep2Title()}</p><span class="summary-grid__info"> ${getLabelText("step2_q1")}</span></div>\n        <div class="summary-grid__answer"><p>${getStep2Subtitle()}</p><span class="summary-grid__info"> ${getLabelText("step2_q2")}</span></div>\n        </div>\n      <div class="summary-grid__row">\n        <div class="summary-grid__answer"><p>Додаткові послуги:</p><span class="summary-grid__info"> ${getLabelText("step3_q1[]", true)}</span></div>\n        <div class="summary-grid__answer"><p>Інтеграції:</p><span class="summary-grid__info"> ${getLabelText("step3_q2")}</span></div>\n        </div>\n      </div>\n    `;
+            document.getElementById("answersReview").innerHTML = html;
+        }
+    }
+    function updateStep2Content() {
+        const selectedType = document.querySelector('input[name="step1_q1"]:checked')?.value;
+        if (!selectedType) return;
+        const allContents = document.querySelectorAll(".step2-content");
+        allContents.forEach((block => {
+            block.style.display = block.getAttribute("data-type") === selectedType ? "block" : "none";
+        }));
+    }
+    function validateStep(index) {
+        const current = steps[index];
+        let questions;
+        if (index === 1) questions = current.querySelectorAll('.step2-content:not([style*="display: none"]) .question'); else questions = current.querySelectorAll(".question");
+        let valid = true;
+        questions.forEach((q => {
+            const inputs = q.querySelectorAll("input");
+            const errorEl = q.querySelector(".error-msg");
+            if (errorEl) {
+                errorEl.textContent = "";
+                errorEl.style.opacity = "0";
+            }
+            if (!inputs.length) return;
+            const type = inputs[0].type;
+            const name = inputs[0].name;
+            let checked = false;
+            if (type === "checkbox") checked = q.querySelectorAll(`input[name="${name}"]:checked`).length > 0; else checked = q.querySelector(`input[name="${name}"]:checked`);
+            if (!checked) {
+                valid = false;
+                if (errorEl) {
+                    errorEl.textContent = "Це поле обов’язкове";
+                    errorEl.style.opacity = "1";
+                }
+            }
+        }));
+        return valid;
+    }
+    nextBtn.addEventListener("click", (() => {
+        if (!validateStep(currentStep)) return;
+        if (currentStep === 0) updateStep2Content();
+        if (currentStep < steps.length - 1) currentStep++;
+        showStep(currentStep);
+    }));
+    prevBtn.addEventListener("click", (() => {
+        if (currentStep > 0) currentStep--;
+        showStep(currentStep);
+    }));
+    script_form.addEventListener("submit", (e => {
+        e.preventDefault();
+        const nameInput = script_form.querySelector('input[name="user_name"]');
+        const phoneInput = script_form.querySelector('input[name="user_tel"]');
+        const nameError = nameInput?.parentElement.querySelector(".error-msg");
+        const phoneError = phoneInput?.parentElement.querySelector(".error-msg");
+        let valid = true;
+        if (!nameInput.value.trim()) {
+            nameError.textContent = "Введіть імʼя";
+            nameError.style.display = "block";
+            valid = false;
+        } else nameError.style.display = "none";
+        if (!phoneInput.value.trim()) {
+            phoneError.textContent = "Введіть номер телефону";
+            phoneError.style.display = "block";
+            valid = false;
+        } else phoneError.style.display = "none";
+        if (!valid) return;
+        const data = new FormData(script_form);
+        const result = {};
+        const labelMap = {
+            A: "Інтернет-магазин",
+            B: "Корпоративний",
+            C: "Лендінг"
+        };
+        data.forEach(((value, key) => {
+            if (key === "step1_q1" && labelMap[value]) result[key] = labelMap[value]; else if (key === "step3_q1[]") {
+                if (!result[key]) result[key] = [];
+                result[key].push(value);
+            } else result[key] = value;
+        }));
+        console.log("Надіслано:", result);
+        script_form.reset();
+        currentStep = 4;
+        showStep(currentStep);
+    }));
+    if (restartBtn) restartBtn.addEventListener("click", (() => {
+        currentStep = 0;
+        showStep(currentStep);
+    }));
+    showStep(currentStep);
+    const inputs = document.querySelectorAll(".question-calculator__radio");
+    inputs.forEach((input => {
+        input.addEventListener("change", (() => {
+            const label = input.closest(".question-calculator__label");
+            if (input.type === "radio") {
+                document.querySelectorAll(`input[name="${input.name}"]`).forEach((el => {
+                    const lbl = el.closest(".question-calculator__label");
+                    if (lbl) lbl.classList.remove("checked");
+                }));
+                if (input.checked && label) label.classList.add("checked");
+            }
+            if (input.type === "checkbox") if (input.checked) label?.classList.add("checked"); else label?.classList.remove("checked");
         }));
     }));
     window["FLS"] = true;
