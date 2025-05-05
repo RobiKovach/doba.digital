@@ -3428,6 +3428,37 @@
             }));
         }));
     }));
+    document.addEventListener("DOMContentLoaded", (() => {
+        const blocks = document.querySelectorAll(".effect-block");
+        blocks.forEach((block => {
+            const svg = block.querySelector(".hover-effect");
+            block.addEventListener("mousemove", (e => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left - svg.clientWidth / 2;
+                const y = e.clientY - rect.top - svg.clientHeight / 2;
+                svg.style.left = `${x}px`;
+                svg.style.top = `${y}px`;
+            }));
+            block.addEventListener("mouseenter", (e => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left - svg.clientWidth / 2;
+                const y = e.clientY - rect.top - svg.clientHeight / 2;
+                svg.style.left = `${x}px`;
+                svg.style.top = `${y}px`;
+                svg.style.opacity = "1";
+                svg.style.transform = "scale(1)";
+            }));
+            block.addEventListener("mouseleave", (e => {
+                const rect = block.getBoundingClientRect();
+                const x = e.clientX - rect.left - svg.clientWidth / 2;
+                const y = e.clientY - rect.top - svg.clientHeight / 2;
+                svg.style.left = `${x}px`;
+                svg.style.top = `${y}px`;
+                svg.style.opacity = "0";
+                svg.style.transform = "scale(0.7)";
+            }));
+        }));
+    }));
     const steps = document.querySelectorAll(".quiz-calculator__step");
     const nextBtn = document.getElementById("nextBtn");
     const prevBtn = document.getElementById("prevBtn");
@@ -3440,6 +3471,9 @@
         steps.forEach(((step, i) => step.classList.toggle("active", i === index)));
         prevBtn.style.display = index > 0 && index < 3 ? "inline-block" : "none";
         nextBtn.style.display = index < steps.length - 2 ? "inline-block" : "none";
+        steps.forEach(((step, i) => {
+            if (i >= 3) step.classList.add("no-margin-top"); else step.classList.remove("no-margin-top");
+        }));
         if (index < 3) {
             indicator.style.display = "flex";
             buttonsBlock.style.display = "flex";
@@ -3509,7 +3543,7 @@
         if (!selectedType) return;
         const allContents = document.querySelectorAll(".step2-content");
         allContents.forEach((block => {
-            block.style.display = block.getAttribute("data-type") === selectedType ? "block" : "none";
+            block.style.display = block.getAttribute("data-type") === selectedType ? "flex" : "none";
         }));
     }
     function validateStep(index) {
