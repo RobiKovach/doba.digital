@@ -1,5 +1,12 @@
 (() => {
     "use strict";
+    function functions_getHash() {
+        if (location.hash) return location.hash.replace("#", "");
+    }
+    function setHash(hash) {
+        hash = hash ? `#${hash}` : window.location.href.split("#")[0];
+        history.pushState("", "", hash);
+    }
     let _slideUp = (target, duration = 500, showmore = 0) => {
         if (!target.classList.contains("_slide")) {
             target.classList.add("_slide");
@@ -209,6 +216,99 @@
                         spollerActiveBlock.open = false;
                     }), spollerSpeed);
                 }
+            }
+        }
+    }
+    function tabs() {
+        const tabs = document.querySelectorAll("[data-tabs]");
+        let tabsActiveHash = [];
+        if (tabs.length > 0) {
+            const hash = functions_getHash();
+            if (hash && hash.startsWith("tab-")) tabsActiveHash = hash.replace("tab-", "").split("-");
+            tabs.forEach(((tabsBlock, index) => {
+                tabsBlock.classList.add("_tab-init");
+                tabsBlock.setAttribute("data-tabs-index", index);
+                tabsBlock.addEventListener("click", setTabsAction);
+                initTabs(tabsBlock);
+            }));
+            let mdQueriesArray = dataMediaQueries(tabs, "tabs");
+            if (mdQueriesArray && mdQueriesArray.length) mdQueriesArray.forEach((mdQueriesItem => {
+                mdQueriesItem.matchMedia.addEventListener("change", (function() {
+                    setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+                }));
+                setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+            }));
+        }
+        function setTitlePosition(tabsMediaArray, matchMedia) {
+            tabsMediaArray.forEach((tabsMediaItem => {
+                tabsMediaItem = tabsMediaItem.item;
+                let tabsTitles = tabsMediaItem.querySelector("[data-tabs-titles]");
+                let tabsTitleItems = tabsMediaItem.querySelectorAll("[data-tabs-title]");
+                let tabsContent = tabsMediaItem.querySelector("[data-tabs-body]");
+                let tabsContentItems = tabsMediaItem.querySelectorAll("[data-tabs-item]");
+                tabsTitleItems = Array.from(tabsTitleItems).filter((item => item.closest("[data-tabs]") === tabsMediaItem));
+                tabsContentItems = Array.from(tabsContentItems).filter((item => item.closest("[data-tabs]") === tabsMediaItem));
+                tabsContentItems.forEach(((tabsContentItem, index) => {
+                    if (matchMedia.matches) {
+                        tabsContent.append(tabsTitleItems[index]);
+                        tabsContent.append(tabsContentItem);
+                        tabsMediaItem.classList.add("_tab-spoller");
+                    } else {
+                        tabsTitles.append(tabsTitleItems[index]);
+                        tabsMediaItem.classList.remove("_tab-spoller");
+                    }
+                }));
+            }));
+        }
+        function initTabs(tabsBlock) {
+            let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-titles]>*");
+            let tabsContent = tabsBlock.querySelectorAll("[data-tabs-body]>*");
+            const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
+            const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
+            if (tabsActiveHashBlock) {
+                const tabsActiveTitle = tabsBlock.querySelector("[data-tabs-titles]>._tab-active");
+                tabsActiveTitle ? tabsActiveTitle.classList.remove("_tab-active") : null;
+            }
+            if (tabsContent.length) tabsContent.forEach(((tabsContentItem, index) => {
+                tabsTitles[index].setAttribute("data-tabs-title", "");
+                tabsContentItem.setAttribute("data-tabs-item", "");
+                if (tabsActiveHashBlock && index == tabsActiveHash[1]) tabsTitles[index].classList.add("_tab-active");
+                tabsContentItem.hidden = !tabsTitles[index].classList.contains("_tab-active");
+            }));
+        }
+        function setTabsStatus(tabsBlock) {
+            let tabsTitles = tabsBlock.querySelectorAll("[data-tabs-title]");
+            let tabsContent = tabsBlock.querySelectorAll("[data-tabs-item]");
+            const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
+            function isTabsAnamate(tabsBlock) {
+                if (tabsBlock.hasAttribute("data-tabs-animate")) return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 500;
+            }
+            const tabsBlockAnimate = isTabsAnamate(tabsBlock);
+            if (tabsContent.length > 0) {
+                const isHash = tabsBlock.hasAttribute("data-tabs-hash");
+                tabsContent = Array.from(tabsContent).filter((item => item.closest("[data-tabs]") === tabsBlock));
+                tabsTitles = Array.from(tabsTitles).filter((item => item.closest("[data-tabs]") === tabsBlock));
+                tabsContent.forEach(((tabsContentItem, index) => {
+                    if (tabsTitles[index].classList.contains("_tab-active")) {
+                        if (tabsBlockAnimate) _slideDown(tabsContentItem, tabsBlockAnimate); else tabsContentItem.hidden = false;
+                        if (isHash && !tabsContentItem.closest(".popup")) setHash(`tab-${tabsBlockIndex}-${index}`);
+                    } else if (tabsBlockAnimate) _slideUp(tabsContentItem, tabsBlockAnimate); else tabsContentItem.hidden = true;
+                }));
+            }
+        }
+        function setTabsAction(e) {
+            const el = e.target;
+            if (el.closest("[data-tabs-title]")) {
+                const tabTitle = el.closest("[data-tabs-title]");
+                const tabsBlock = tabTitle.closest("[data-tabs]");
+                if (!tabTitle.classList.contains("_tab-active") && !tabsBlock.querySelector("._slide")) {
+                    let tabActiveTitle = tabsBlock.querySelectorAll("[data-tabs-title]._tab-active");
+                    tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter((item => item.closest("[data-tabs]") === tabsBlock)) : null;
+                    tabActiveTitle.length ? tabActiveTitle[0].classList.remove("_tab-active") : null;
+                    tabTitle.classList.add("_tab-active");
+                    setTabsStatus(tabsBlock);
+                }
+                e.preventDefault();
             }
         }
     }
@@ -3871,6 +3971,50 @@
                 },
                 on: {}
             });
+            new swiper_core_Swiper(".comments-about__slider", {
+                modules: [ Navigation, Pagination ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 2,
+                spaceBetween: 40,
+                speed: 800,
+                pagination: {
+                    el: ".comments-about-pagination",
+                    clickable: true,
+                    type: "fraction"
+                },
+                navigation: {
+                    prevEl: ".comments-about-prev",
+                    nextEl: ".comments-about-next"
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.1,
+                        spaceBetween: 16
+                    },
+                    480: {
+                        slidesPerView: 1.1,
+                        spaceBetween: 16
+                    },
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 40
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 40
+                    },
+                    1024: {
+                        slidesPerView: 2,
+                        spaceBetween: 40
+                    },
+                    1268: {
+                        slidesPerView: 2,
+                        spaceBetween: 40
+                    }
+                },
+                on: {}
+            });
         }
     }
     window.addEventListener("load", (function(e) {
@@ -4103,14 +4247,14 @@
     let currentStep = 0;
     function showStep(index) {
         steps.forEach(((step, i) => step.classList.toggle("active", i === index)));
-        prevBtn.style.display = index > 0 && index < 3 ? "inline-block" : "none";
-        nextBtn.style.display = index < steps.length - 2 ? "inline-block" : "none";
+        if (prevBtn) prevBtn.style.display = index > 0 && index < 3 ? "inline-block" : "none";
+        if (nextBtn) nextBtn.style.display = index < steps.length - 2 ? "inline-block" : "none";
         steps.forEach(((step, i) => {
             if (i >= 3) step.classList.add("no-margin-top"); else step.classList.remove("no-margin-top");
         }));
         if (index < 3) {
-            indicator.style.display = "flex";
-            buttonsBlock.style.display = "flex";
+            if (indicator) indicator.style.display = "flex";
+            if (buttonsBlock) buttonsBlock.style.display = "flex";
             document.querySelectorAll(".step-indicator span").forEach(((el, i) => {
                 el.classList.toggle("active", i === index);
             }));
@@ -4207,20 +4351,21 @@
         }));
         return valid;
     }
-    nextBtn.addEventListener("click", (() => {
+    if (typeof nextBtn !== "undefined" && nextBtn) nextBtn.addEventListener("click", (() => {
         if (!validateStep(currentStep)) return;
         if (currentStep === 0) updateStep2Content();
         if (currentStep < steps.length - 1) currentStep++;
         showStep(currentStep);
     }));
-    prevBtn.addEventListener("click", (() => {
+    if (typeof prevBtn !== "undefined" && prevBtn) prevBtn.addEventListener("click", (() => {
         if (currentStep > 0) currentStep--;
         showStep(currentStep);
     }));
-    script_form.addEventListener("submit", (e => {
+    const calculatorForm = document.querySelector(".form-calculator__form");
+    if (calculatorForm) calculatorForm.addEventListener("submit", (e => {
         e.preventDefault();
-        const nameInput = script_form.querySelector('input[name="user_name"]');
-        const phoneInput = script_form.querySelector('input[name="user_tel"]');
+        const nameInput = calculatorForm.querySelector('input[name="user_name"]');
+        const phoneInput = calculatorForm.querySelector('input[name="user_tel"]');
         const nameError = nameInput?.parentElement.querySelector(".error-msg");
         const phoneError = phoneInput?.parentElement.querySelector(".error-msg");
         let valid = true;
@@ -4235,7 +4380,7 @@
             valid = false;
         } else phoneError.style.display = "none";
         if (!valid) return;
-        const data = new FormData(script_form);
+        const data = new FormData(calculatorForm);
         const result = {};
         const labelMap = {
             A: "Інтернет-магазин",
@@ -4249,7 +4394,7 @@
             } else result[key] = value;
         }));
         console.log("Надіслано:", result);
-        script_form.reset();
+        calculatorForm.reset();
         currentStep = 4;
         showStep(currentStep);
     }));
@@ -4306,4 +4451,5 @@
     window["FLS"] = true;
     menuInit();
     spollers();
+    tabs();
 })();
