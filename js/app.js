@@ -4015,6 +4015,45 @@
                 },
                 on: {}
             });
+            new swiper_core_Swiper(".body-etaps__slider", {
+                modules: [ Navigation ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 2.3,
+                spaceBetween: 24,
+                speed: 800,
+                navigation: {
+                    prevEl: ".swiper-button-prev-body-etaps",
+                    nextEl: ".swiper-button-next-body-etaps"
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1.1,
+                        spaceBetween: 20
+                    },
+                    480: {
+                        slidesPerView: 1.1,
+                        spaceBetween: 20
+                    },
+                    640: {
+                        slidesPerView: 2.3,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    },
+                    1024: {
+                        slidesPerView: 2.3,
+                        spaceBetween: 20
+                    },
+                    1268: {
+                        slidesPerView: 2.3,
+                        spaceBetween: 20
+                    }
+                },
+                on: {}
+            });
         }
     }
     window.addEventListener("load", (function(e) {
