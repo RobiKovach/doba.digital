@@ -4222,9 +4222,10 @@
         }, {
             containerSelector: ".slide-keys__image",
             imageSelector: ".slide-keys__img",
+            threeDImg: ".3d-image",
             multiple: true
         } ];
-        allBanners.forEach((({containerSelector, imageSelector, multiple}) => {
+        allBanners.forEach((({containerSelector, imageSelector, multiple, threeDImg}) => {
             const banners = multiple ? document.querySelectorAll(containerSelector) : [ document.querySelector(containerSelector) ].filter(Boolean);
             banners.forEach((banner => {
                 const image = banner.querySelector(imageSelector);
