@@ -4233,6 +4233,12 @@ h6 {
   flex-direction: column;
   row-gap: 16px
 }
+.items-left-why-we__lii {
+  display: flex;
+  -webkit-column-gap: 16px;
+  -moz-column-gap: 16px;
+  column-gap: 16px
+}
 .items-left-why-we__description {
   color: #4b5563;
   font-size: 16px;
