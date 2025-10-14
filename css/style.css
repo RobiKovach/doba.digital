@@ -4248,7 +4248,7 @@ h6 {
 .items-left-why-we__text {
   color: #161d22;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 140%;
   letter-spacing: -.8px
 }
@@ -4812,7 +4812,13 @@ h6 {
   border: 1px solid #e9eaeb;
   background: #161d22;
   width: 48%;
-  color: #fff
+  color: #fff;
+  transition: all .3s ease-in-out
+}
+.why-call-info__item:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(240,83,45,.3)
 }
 .why-call-info__header {
   display: flex;
@@ -5415,7 +5421,6 @@ h6 {
   }
   .comments__slide {
     align-items: center;
-    flex-direction: column;
     row-gap: 24px;
     padding: 20px;
     border-radius: 20px
@@ -5629,6 +5634,11 @@ h6 {
     flex-direction: column;
     row-gap: 40px;
     align-items: center
+  }
+  .portpholio-inside__text {
+    -webkit-column-gap: 20px;
+    -moz-column-gap: 20px;
+    column-gap: 20px
   }
   .portpholio-inside__paragraph {
     width: 280px
@@ -6180,6 +6190,16 @@ h6 {
   .header__container {
     padding: 8px 12px
   }
+  .comments__slide {
+    flex-direction: column
+  }
+  .slide-comments__info {
+    width: 100%;
+    -webkit-column-gap: 20px;
+    -moz-column-gap: 20px;
+    column-gap: 20px;
+    flex-direction: row
+  }
   .help-about__box {
     flex-direction: column;
     row-gap: 16px;
@@ -6221,6 +6241,9 @@ h6 {
     width: 172px;
     right: 14px;
     bottom: 25px
+  }
+  .etaps__header {
+    align-items: flex-start
   }
   .horeca-info__container {
     padding: 0 20px
@@ -6271,6 +6294,10 @@ h6 {
   .design-services__body {
     flex-direction: column;
     row-gap: 24px
+  }
+  .info-comments__header {
+    flex-direction: column;
+    row-gap: 8px
   }
   .funks-site__container {
     padding: 0 20px
@@ -6331,6 +6358,9 @@ h6 {
   .portpholio-inside__text {
     flex-direction: column
   }
+  .portpholio-inside__paragraph:nth-child(2) {
+    width: 100%
+  }
   .portpholio-inside__paragraph {
     width: 100%
   }
@@ -6349,6 +6379,9 @@ h6 {
   .portpholio-mob__descriptions {
     flex-direction: column;
     row-gap: 16px
+  }
+  .portpholio-mob__paragraph:first-child {
+    width: 100%
   }
   .portpholio-mob__item {
     width: 150px
