@@ -6,9 +6,9 @@
 	<meta charset="UTF-8" />
 	<meta name="format-detection" content="telephone=no" />
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20251014131404" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20251014143353" />
 	<link rel="shortcut icon" href="favicon.ico" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js?_v=20251014131404"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js?_v=20251014143353"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -115,7 +115,7 @@
 							<a href="" class="links-header__telegram">
 								<img src="img/telegram-icon.svg" alt="Image" /></a>
 						</div>
-						<button class="actions-header__btn lottie-button-header">
+						<button data-popup="#popup" class="actions-header__btn lottie-button-header">
 							<div class="lottie-bg-header" id="lottie-hover"></div>
 							<span class="btn-text">Залишити заявку</span>
 						</button>
@@ -149,7 +149,7 @@
 							онлайн магазин, що працює без збоїв, легко масштабується і
 							забезпечує максимальну конверсію.
 						</p>
-						<button class="actions__btn lottie-button">
+						<button data-popup="#popup" class="actions__btn lottie-button">
 							<div class="lottie-bg-hero" id="lottie-hover"></div>
 							<span class="btn-text">Отримати консультацію</span>
 						</button>
@@ -347,7 +347,7 @@
 								рівень із сильним сайтом.
 							</p>
 						</div>
-						<a href="#" class="help__btn">Надіслати заявку</a>
+						<a href="#" data-popup="#popup" class="help__btn">Надіслати заявку</a>
 					</div>
 					<img src="img/help-1.webp" alt="mockup" class="help__img help1" />
 					<img src="img/help-2.webp" alt="mockup" class="help__img help2" />
@@ -1059,7 +1059,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="actions__btn lottie-button">
+					<button data-popup="#popup" class="actions__btn lottie-button">
 						<div class="lottie-bg-hero" id="lottie-hover"></div>
 						<span class="btn-text">Отримати консультацію</span>
 					</button>
@@ -1622,7 +1622,7 @@
 							<a href="" class="item-footer__social">
 								<img src="img/linkedin-icon.svg" alt="linkedin-icon" /></a>
 						</div>
-						<button class="actions__btn lottie-button">
+						<button data-popup="#popup" class="actions__btn lottie-button">
 							<div class="lottie-bg" id="lottie-hover"></div>
 							<span class="btn-text">Залишити заявку</span>
 						</button>
@@ -1631,9 +1631,55 @@
 				<div class="footer__second">© Doba Digital 2025. Усі права захищені</div>
 			</div>
 		</footer>
+		<div id="popup" aria-hidden="true" class="popup">
+			<div class="popup__wrapper">
+				<div class="popup__content">
+					<button data-close type="button" class="popup__close">
+						<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path opacity="0.850056" d="M1.73333 1.48883L21.5469 21.0288" stroke="#979797" stroke-linecap="square" />
+							<path opacity="0.850056" d="M21.2667 1.48883L1.45309 21.0288" stroke="#979797" stroke-linecap="square" />
+						</svg>
+					</button>
+					<div class="popup__text">
+						<form action="" class="contact__form form-contact form-contact-popup">
+							<p class="form-contact__title title">Залишити заявку</p>
+							<div class="form-contact__fields fields-form">
+								<div class="fields-form__row row-fields">
+									<div class="row-fields__item item-fields">
+										<label for="form-name" class="item-fields__label">Ваше імʼя*</label>
+										<input id="form-name" type="text" placeholder="Введіть імʼя" class="item-fields__input" required />
+									</div>
+									<div class="row-fields__item item-fields">
+										<label for="form-phone" class="item-fields__label">Ваш телефон*</label>
+										<input type="tel" id="form-phone" placeholder="+ 380" class="item-fields__input" required />
+									</div>
+								</div>
+								<div class="fields-form__row row-fields">
+									<div class="row-fields__item item-fields">
+										<label for="form-email" class="item-fields__label">Email</label>
+										<input id="form-email" type="email" placeholder="Введіть ел.пошту" class="item-fields__input" />
+									</div>
+									<div class="row-fields__item item-fields">
+										<label for="form-company" class="item-fields__label">Назва компанії</label>
+										<input type="tel" id="form-company" placeholder="Введіть назву компанії" class="item-fields__input" />
+									</div>
+								</div>
+								<div class="fields-form__row row-fields">
+									<div class="row-fields__item item-fields textarea">
+										<label for="form-message" class="item-fields__label">Назва компанії</label>
+										<textarea class="item-fields__textarea" placeholder="Напишіть сюди своє повідомлення" name="message" id="form-message"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-contact__btn btn">Надіслати</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
-	<script src="js/app.min.js?_v=20251014131404"></script>
+	<script src="js/app.min.js?_v=20251014143353"></script>
 </body>
 
 </html>
