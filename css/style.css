@@ -128,7 +128,7 @@ body::after {
   opacity: 1
 }
 .popup {
-  position: absolute;
+  position: fixed;
   top: -1000%;
   left: 0;
   bottom: 0;
@@ -6266,6 +6266,20 @@ body::after {
     -moz-column-gap: 20px;
     column-gap: 20px;
     flex-direction: row
+  }
+  .form-contact__fields-popup {
+    row-gap: 12px
+  }
+  .fields-form__row-popup {
+    row-gap: 12px
+  }
+  .item-fields__input-popup {
+    padding: 8px 0
+  }
+  .item-fields__textarea-popup {
+    padding: 12px;
+    border-radius: 10px;
+    height: 80px
   }
   .help-about__box {
     flex-direction: column;
